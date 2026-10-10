@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Never hardcode a colour in a component: use the semantic
+ * utilities mapped below (bg-primary, text-muted-foreground, border-border...).
+ *
+ * Royal indigo with emerald for "good", the same palette as the college's
+ * management system, so the website and the portal read as one institution.
+ * Contrast measured against WCAG: white on --primary 6.29:1; --muted-foreground
+ * on --card 7.58:1. Dark mode follows the reader's system setting.
+ */
+:root {
+  --radius: 0.375rem;
+
+  --background: #f6f7fb;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #eef0f6;
+  --secondary-foreground: #1e293b;
+  --muted: #eef0ff;
+  --muted-foreground: #475569;
+  --accent: #eef0ff;
+  --accent-foreground: #3730a3;
+
+  --success: #047857;
+  --destructive: #dc2626;
+
+  --border: #e2e5f0;
+  --input: #cbd2e1;
+  --ring: #4f46e5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b0f1e;
+    --foreground: #e6e9f5;
+    --card: #131833;
+    --card-foreground: #e6e9f5;
+
+    /* A light indigo primary with dark text (9.57:1). */
+    --primary: #a5b4fc;
+    --primary-foreground: #0b0f1e;
+    --secondary: #1c2244;
+    --secondary-foreground: #e6e9f5;
+    --muted: #181d3d;
+    --muted-foreground: #a5adcb;
+    --accent: #1e2250;
+    --accent-foreground: #e6e9f5;
+
+    --success: #34d399;
+    --destructive: #f87171;
+
+    --border: #262c52;
+    --input: #2c335e;
+    --ring: #a5b4fc;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* System fonts: nothing is downloaded, so the first paint is never waiting on one. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  ::selection {
+    @apply bg-primary/20;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
